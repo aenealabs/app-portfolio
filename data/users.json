@@ -1,0 +1,8 @@
+{
+  "_note": "Fictional demo users for the 'acting as' switcher. Approvers decide an app's future and read contracts; others can view. Real sign-in (AP_AUTH=oidc) replaces this.",
+  "users": [
+    {"id": "po", "name": "Jordan Lee", "role": "Senior Manager, IT Product Ownership", "approver": true},
+    {"id": "arch", "name": "Sam Patel", "role": "Enterprise Architect", "approver": true},
+    {"id": "eng", "name": "Kenji Watanabe", "role": "Senior Design Engineer", "approver": false}
+  ]
+}

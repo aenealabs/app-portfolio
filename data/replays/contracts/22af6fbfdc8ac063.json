@@ -1,0 +1,35 @@
+{
+  "input": "<contract name=\"northbridge.md\">\n# Northbridge Software \u2014 QualityLoop Subscription (fictional excerpt)\n\n## Term and Renewal\nCurrent term ends February 28, 2027. The subscription renews automatically for twelve (12) months unless either party gives notice of non-renewal at least forty-five (45) days before the end of the term.\n\n## Price Changes\nRenewal fees may increase by no more than four percent (4%) per renewal.\n\n## User Counts\nNamed users above the licensed quantity are invoiced quarterly at the contracted unit rate.\n\n## Data\nCustomer data can be exported in CSV at any time and for thirty (30) days after termination.\n</contract>",
+  "output": {
+    "end_date": {
+      "value": "2027-02-28",
+      "quote": "Current term ends February 28, 2027."
+    },
+    "auto_renew": {
+      "value": "yes",
+      "quote": "The subscription renews automatically for twelve (12) months unless either party gives notice of non-renewal at least forty-five (45) days before the end of the term."
+    },
+    "notice_days": {
+      "value": "45",
+      "quote": "The subscription renews automatically for twelve (12) months unless either party gives notice of non-renewal at least forty-five (45) days before the end of the term."
+    },
+    "escalator_pct": {
+      "value": "4",
+      "quote": "Renewal fees may increase by no more than four percent (4%) per renewal."
+    },
+    "trueup_premium_pct": {
+      "value": "0",
+      "quote": "Named users above the licensed quantity are invoiced quarterly at the contracted unit rate."
+    },
+    "termination": null,
+    "data_export": {
+      "value": "Customer data can be exported in CSV at any time and for 30 days after termination, and no export fee is stated.",
+      "quote": "Customer data can be exported in CSV at any time and for thirty (30) days after termination."
+    },
+    "watch_outs": [
+      "The subscription renews automatically for 12 months unless you give notice at least 45 days before February 28, 2027, which is by about January 14, 2027.",
+      "Renewal fees can rise by up to 4% at each renewal, so budget for it or negotiate before the notice deadline.",
+      "Users above the licensed count are billed quarterly at the unit rate, so check your named-user count before renewal."
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "input": "<contract name=\"calder.md\">\n# Calder Tools \u2014 SpecTrack 5 Subscription (fictional excerpt)\n\n## Term\nThis subscription runs from July 1, 2024 to June 30, 2027 and does not renew automatically. A new order form is required to continue service.\n\n## Termination for Convenience\nCustomer may terminate for convenience on sixty (60) days written notice; prepaid fees for the remainder of the current year are not refunded.\n\n## Fees\nFees are fixed for the term.\n\n## Data\nCustomer may export requirements, links, and history in ReqIF format at any time during the term.\n</contract>",
+  "output": {
+    "end_date": {
+      "value": "2027-06-30",
+      "quote": "This subscription runs from July 1, 2024 to June 30, 2027 and does not renew automatically."
+    },
+    "auto_renew": {
+      "value": "no",
+      "quote": "This subscription runs from July 1, 2024 to June 30, 2027 and does not renew automatically."
+    },
+    "notice_days": null,
+    "escalator_pct": null,
+    "trueup_premium_pct": null,
+    "termination": {
+      "value": "The customer can terminate for convenience with 60 days' written notice, but prepaid fees for the rest of the current year are not refunded.",
+      "quote": "Customer may terminate for convenience on sixty (60) days written notice; prepaid fees for the remainder of the current year are not refunded."
+    },
+    "data_export": {
+      "value": "The customer can export requirements, links, and history in ReqIF format at any time during the term; no fee is stated.",
+      "quote": "Customer may export requirements, links, and history in ReqIF format at any time during the term."
+    },
+    "watch_outs": [
+      "The subscription does not renew automatically, so a new order form must be in place before June 30, 2027 to avoid losing service.",
+      "Data export is only promised during the term, so export requirements, links, and history in ReqIF before June 30, 2027 if you might not continue.",
+      "Ending early needs 60 days' written notice and prepaid fees for the rest of that year are not refunded, so time any early exit to the end of a contract year."
+    ]
+  }
+}

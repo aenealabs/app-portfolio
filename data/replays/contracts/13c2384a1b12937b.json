@@ -1,0 +1,35 @@
+{
+  "input": "<contract name=\"keystone-plm.md\">\n# Keystone PLM \u2014 Enterprise Subscription Agreement (fictional excerpt)\n\nOrder Form KS-2024-0417 \u00b7 Customer: Engineering IT \u00b7 Product: PLM platform, concurrent engineer seats\n\n## 1. Subscription Term and Renewal\n1.1 The Subscription Term runs from February 1, 2024 through January 31, 2027.\n1.2 The Subscription Term renews automatically for successive twelve (12) month periods unless either party gives written notice of non-renewal at least one hundred twenty (120) days before the end of the then-current term.\n\n## 2. Fees\n2.1 Annual fees are invoiced in advance. Fees for any renewal term increase by five percent (5%) over the fees for the prior term.\n2.2 Seat reductions take effect only at renewal and require the notice in Section 1.2.\n\n## 3. Usage and Compliance\n3.1 Concurrent seats measure the peak number of simultaneous sessions. Customer may run a usage report at any time.\n3.2 There is no true-up for concurrent seats; sessions above the entitlement are queued until a seat is free.\n\n## 4. Data\n4.1 On termination, Customer may export all data in documented open formats for ninety (90) days.\n</contract>",
+  "output": {
+    "end_date": {
+      "value": "2027-01-31",
+      "quote": "The Subscription Term runs from February 1, 2024 through January 31, 2027."
+    },
+    "auto_renew": {
+      "value": "yes",
+      "quote": "The Subscription Term renews automatically for successive twelve (12) month periods unless either party gives written notice of non-renewal at least one hundred twenty (120) days before the end of the then-current term."
+    },
+    "notice_days": {
+      "value": "120",
+      "quote": "unless either party gives written notice of non-renewal at least one hundred twenty (120) days before the end of the then-current term."
+    },
+    "escalator_pct": {
+      "value": "5",
+      "quote": "Fees for any renewal term increase by five percent (5%) over the fees for the prior term."
+    },
+    "trueup_premium_pct": {
+      "value": "0",
+      "quote": "There is no true-up for concurrent seats; sessions above the entitlement are queued until a seat is free."
+    },
+    "termination": null,
+    "data_export": {
+      "value": "On termination, the customer can export all data in documented open formats for 90 days, and no export fee is stated.",
+      "quote": "On termination, Customer may export all data in documented open formats for ninety (90) days."
+    },
+    "watch_outs": [
+      "Send written non-renewal notice at least 120 days before January 31, 2027 (by about October 3, 2026), or the subscription renews automatically for another 12 months.",
+      "Fees go up by a fixed 5% at every renewal, so negotiate or budget for the increase before the notice deadline.",
+      "Seat reductions only take effect at renewal and need the same 120-day notice, so review the usage report and decide on seat counts before the notice deadline."
+    ]
+  }
+}

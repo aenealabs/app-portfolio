@@ -1,0 +1,32 @@
+{
+  "input": "<contract name=\"ardent.md\">\n# Ardent Systems \u2014 Vaultline Classic Support Renewal (fictional excerpt)\n\n## Support Term\nSupport for Vaultline Classic is provided through November 30, 2026. This agreement renews automatically for an additional twelve (12) months unless Customer provides written notice of non-renewal at least ninety (90) days prior to the end of the current term.\n\n## End of Life\nVaultline Classic reaches end of vendor support on March 31, 2027. After that date Ardent will provide no security patches. Support fees for any period after end of life are non-refundable.\n\n## Fees\nSupport fees for a renewal term are payable in full in advance and increase by eight percent (8%).\n\n## Data Export\nOn request, Ardent will provide a one-time bulk export of vault contents at a fee of $40,000.\n</contract>",
+  "output": {
+    "end_date": {
+      "value": "2026-11-30",
+      "quote": "Support for Vaultline Classic is provided through November 30, 2026."
+    },
+    "auto_renew": {
+      "value": "yes",
+      "quote": "This agreement renews automatically for an additional twelve (12) months unless Customer provides written notice of non-renewal at least ninety (90) days prior to the end of the current term."
+    },
+    "notice_days": {
+      "value": "90",
+      "quote": "This agreement renews automatically for an additional twelve (12) months unless Customer provides written notice of non-renewal at least ninety (90) days prior to the end of the current term."
+    },
+    "escalator_pct": {
+      "value": "8",
+      "quote": "Support fees for a renewal term are payable in full in advance and increase by eight percent (8%)."
+    },
+    "trueup_premium_pct": null,
+    "termination": null,
+    "data_export": {
+      "value": "Ardent provides a one-time bulk export of vault contents on request for a fee of $40,000.",
+      "quote": "On request, Ardent will provide a one-time bulk export of vault contents at a fee of $40,000."
+    },
+    "watch_outs": [
+      "Send written non-renewal notice at least 90 days before November 30, 2026, or support renews automatically for another 12 months.",
+      "A renewal would run past the March 31, 2027 end of life, so you would prepay non-refundable fees, 8% higher, for months with no security patches.",
+      "Budget $40,000 for the one-time bulk export of vault contents and plan its timing before support ends."
+    ]
+  }
+}

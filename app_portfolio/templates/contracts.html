@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header"><h1>Contracts</h1><span class="muted">The AI reads each contract; code checks every quote, date, and number before a term is used</span></div>
+{% if message %}<div class="banner error" role="alert"><span class="material-symbols-outlined">error</span><div>{{ message }}</div></div>{% endif %}
+<div class="card"><ul class="list">
+  {% for v in views %}
+  <li class="list-item"><span class="avatar"><span class="material-symbols-outlined">contract</span></span>
+    <div class="text"><a class="primary" href="/contracts/{{ v.contract.name }}">{{ v.contract.text.splitlines()[0].lstrip('# ') }}</a>
+      <div class="secondary">{% if v.reading %}{{ v.checked | selectattr('ok') | list | length }} terms checked{% if v.flagged %} · {{ v.flagged }} flagged{% endif %} · {{ v.reading.drafted_by }}{% else %}not read yet{% endif %}</div></div>
+    {% if v.reading %}<span class="chip {{ 'trace-unverified' if v.flagged else 'trace-traced' }}">{{ 'check flags' if v.flagged else 'checked' }}</span>{% endif %}</li>
+  {% endfor %}
+</ul></div>
+{% endblock %}

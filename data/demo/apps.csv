@@ -1,0 +1,19 @@
+key,name,vendor,category,business_unit,capabilities,users_licensed,active_users_90d,annual_cost_k,support_end,hosting,open_security_findings,integrations,owner,ad_group,active_source
+APP-01,Vaultline Classic,Ardent Systems,CAD data management,eMobility,CAD data management;document management;access control;where-used reporting,480,402,310,2027-03-31,on-prem,4,6,Grace Whitfield,"CN=GG-Vaultline-Users,OU=Groups,DC=corp,DC=example,DC=com",app audit log
+APP-02,ChangeDesk,Northbridge Software,Engineering change,Industrial Controls,engineering change;workflow approvals;document management,220,61,145,,SaaS,0,2,Hannah Liu,,SaaS sign-in log
+APP-03,SpecTrack 5,Calder Tools,Requirements,Aerospace Systems,requirements management;traceability;verification planning,160,132,120,,SaaS,0,3,Marcus Bell,,SaaS sign-in log
+APP-04,PartFinder,in-house,Part search,Electrical Products,part management;classification;where-used reporting,900,118,85,2026-12-31,on-prem,2,1,Hannah Liu,"CN=GG-PartFinder-Users,OU=Groups,DC=corp,DC=example,DC=com",app audit log
+APP-05,SimuForge,Helix Engineering,Simulation,Aerospace Systems,structural simulation;thermal simulation;results management,70,64,410,,hosted,0,2,Marcus Bell,,SaaS sign-in log
+APP-06,DrawShare,in-house,Drawing distribution,Global Supply Chain,3D viewer;supplier collaboration;document management,350,210,60,2026-06-30,on-prem,5,3,Daniel Okafor,"CN=GG-DrawShare-Users,OU=Groups,DC=corp,DC=example,DC=com",
+APP-07,TestBench Data,Quorra Labs,Test data,eMobility,test data management;results management;lab scheduling,90,71,95,,SaaS,0,2,Grace Whitfield,,SaaS sign-in log
+APP-08,BOMBridge,in-house,Integration,Electrical Products,BOM management;ERP integration,40,38,140,2027-09-30,on-prem,1,4,Elena Kovacs,"CN=GG-BOMBridge-Operators,OU=Groups,DC=corp,DC=example,DC=com",app audit log
+APP-09,ClassiFy,Meridian Data,Classification,Trade Compliance,classification;export screening,60,12,48,,SaaS,0,1,Tomas Rivera,,SaaS sign-in log
+APP-10,CircuitStudio Pro,Voltaic,Electrical CAD,Electrical Products,schematic design;PCB layout;library management,210,188,520,,on-prem,0,2,Priya Raman,"CN=GG-CircuitStudio-Users,OU=Groups,DC=corp,DC=example,DC=com",license server
+APP-11,RedlineQ,Sablewood,Markup,Industrial Controls,3D viewer;markup,150,22,18,,SaaS,0,0,Hannah Liu,,SaaS sign-in log
+APP-12,ToolRoom Tracker,in-house,Tooling,Plant Operations,tooling records;maintenance scheduling,45,41,12,,on-prem,1,0,Elena Kovacs,"CN=GG-ToolRoom-Users,OU=Groups,DC=corp,DC=example,DC=com",
+APP-13,QualityLoop,Northbridge Software,Quality,Global Supply Chain,nonconformance;corrective action;supplier collaboration,260,198,175,,SaaS,0,3,Daniel Okafor,,SaaS sign-in log
+APP-14,DocuVault 9,Ardent Systems,Document management,Aerospace Systems,document management;access control;workflow approvals,300,95,130,2027-01-31,on-prem,3,2,Marcus Bell,"CN=GG-DocuVault-Users,OU=Groups,DC=corp,DC=example,DC=com",app audit log
+APP-15,MaterialsDB,in-house,Materials,Electrical Products,material properties;compliance declarations,120,104,22,,on-prem,0,1,Priya Raman,"CN=GG-MaterialsDB-Users,OU=Groups,DC=corp,DC=example,DC=com",
+APP-16,PlantView,Sablewood,Viewer,Plant Operations,3D viewer,400,380,40,,SaaS,0,1,Elena Kovacs,,SaaS sign-in log
+APP-17,FormFlow,Calder Tools,Workflow,Industrial Controls,workflow approvals;forms,180,30,55,,SaaS,0,1,Hannah Liu,,SaaS sign-in log
+APP-18,HarnessCAD,Voltaic,Wire harness design,eMobility,harness design;library management,55,50,160,,on-prem,0,2,Grace Whitfield,"CN=GG-HarnessCAD-Users,OU=Groups,DC=corp,DC=example,DC=com",license server

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% macro tchip(t) %}<span class="chip time-{{ t | lower }}">{{ t }}</span>{% endmacro %}
+{% block content %}
+<div class="page-header"><h1>Application portfolio</h1><span class="muted">{{ apps | length }} engineering apps · {{ total | money }} a year · as of {{ as_of.strftime('%Y-%m-%d') }} · proposals by rule, decisions by people</span></div>
+{% if message %}<div class="banner error" role="alert"><span class="material-symbols-outlined">error</span><div>{{ message }}</div></div>{% endif %}
+<div class="kpis kpis-4">
+  {% for t in time_options %}<div class="card kpi"><div class="overline">{{ t }}</div><div class="big">{{ by.get(t, 0) }}</div><div class="muted">{{ cost[t] | money }} a year</div></div>{% endfor %}
+</div>
+<div class="grid-2">
+  <div class="card">
+    <div class="card-header"><h3>Where each app sits</h3><span class="muted" style="margin-left:auto;font-size:12px">Hover a dot for the app</span></div>
+    <div class="card-body">
+      <div class="quad" role="img" aria-label="Apps by business fit and technical fit">
+        <div class="q q-tl">Migrate<small>people use it; the technology is a risk</small></div>
+        <div class="q q-tr">Invest<small>used and healthy</small></div>
+        <div class="q q-bl">Eliminate<small>little use, weak technology</small></div>
+        <div class="q q-br">Tolerate<small>little use, but sound</small></div>
+        {% for a in apps %}{% set t = decisions[a.app.key].decision if a.app.key in decisions else a.proposal %}
+        <a class="dot time-{{ t | lower }} {{ 'ring' if a.overlap >= limits.OVERLAP_HIGH }}" href="/apps/{{ a.app.key }}" style="left:{{ [[a.technical, 4] | max, 96] | min }}%;bottom:{{ [[a.business, 6] | max, 94] | min }}%;width:{{ 10 + (a.app.annual_cost_k ** 0.5) | round | int }}px;height:{{ 10 + (a.app.annual_cost_k ** 0.5) | round | int }}px" title="{{ a.app.name }}: {{ t }} · business {{ a.business }}, technical {{ a.technical }}, overlap {{ (100 * a.overlap) | round | int }}% · {{ a.app.annual_cost_k | money }}/yr"></a>
+        {% endfor %}
+      </div>
+      <div class="quad-axes"><span>↑ business fit · technical fit →</span><span>dot size: annual cost</span></div>
+      <div class="legend">{% for x in time_options %}<span><i class="sw time-{{ x | lower }}"></i>{{ x }}</span>{% endfor %}<span><i class="sw ring-sw"></i>duplicates the PLM platform</span></div>
+      <p class="muted" style="font-size:12px;margin-bottom:0">Color is the proposal (or the decision, once made). A ringed app's capabilities are mostly in the PLM platform already, so it is proposed for Migrate or Eliminate wherever it sits.</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><h3>The PLM platform already provides</h3></div>
+    <div class="card-body"><div class="caps">{% for c in platform %}<span class="chip outlined">{{ c }}</span>{% endfor %}</div></div>
+  </div>
+</div>
+<div class="card">
+  <table class="apps">
+    <thead><tr><th>App</th><th>Unit</th><th class="num">Active users</th><th class="num">Technical</th><th class="num">Overlap</th><th class="num">Cost / yr</th><th>Rules propose</th><th>Decision</th></tr></thead>
+    <tbody>
+    {% for a in apps %}{% set d = decisions.get(a.app.key) %}
+      <tr>
+        <td><a class="primary" href="/apps/{{ a.app.key }}">{{ a.app.name }}</a><div class="muted" style="font-size:12px"><span class="mono">{{ a.app.key }}</span> · {{ a.app.category }} · {{ a.app.vendor }}{% for f in a.flags %} · <span class="flag">{{ f }}</span>{% endfor %}</div></td>
+        <td>{{ a.app.business_unit }}</td>
+        <td class="num">{{ a.app.active_users_90d }} / {{ a.app.users_licensed }}</td>
+        <td class="num">{{ a.technical }}</td>
+        <td class="num">{{ (100 * a.overlap) | round | int }}%</td>
+        <td class="num">{{ a.app.annual_cost_k | money }}</td>
+        <td>{{ tchip(a.proposal) }}</td>
+        <td>{% if d %}{{ tchip(d.decision) }}{% if d.sent_to_backlog %} <span class="chip outlined">in backlog</span>{% endif %}{% else %}<span class="muted">open</span>{% endif %}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

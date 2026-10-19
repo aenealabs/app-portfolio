@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% macro tchip(t) %}<span class="chip time-{{ t | lower }}">{{ t }}</span>{% endmacro %}
+{% block content %}{% set x = a.app %}
+<div class="page-header"><h1>{{ x.name }}</h1><span class="muted"><span class="mono">{{ x.key }}</span> · {{ x.category }} · {{ x.vendor }} · {{ x.business_unit }} · owner {{ x.owner }}</span></div>
+{% if message %}<div class="banner error" role="alert"><span class="material-symbols-outlined">error</span><div>{{ message }}</div></div>{% endif %}
+{% if notice %}<div class="banner success"><span class="material-symbols-outlined">check_circle</span><div>{{ notice }}</div></div>{% endif %}
+<div class="grid-2">
+  <div>
+    <div class="card">
+      <div class="card-header"><h3>Rules propose</h3>{{ tchip(a.proposal) }}</div>
+      <div class="card-body">
+        <ul class="why">{% for w in a.why %}<li>{{ w }}</li>{% endfor %}</ul>
+        {% if a.flags %}<div class="banner warning" style="margin:8px 0 0"><span class="material-symbols-outlined">warning</span><div>{% set f = a.flags | join('; ') %}{{ f[:1] | upper }}{{ f[1:] }}.</div></div>{% endif %}
+        <details class="rule-text"><summary>The rules</summary><ul class="tight">{% for k in ['business', 'technical', 'overlap', 'time'] %}<li>{{ rules[k] }}.</li>{% endfor %}</ul></details>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><h3>Inventory record</h3></div>
+      <div class="card-body"><dl class="facts-list">
+        <dt>Active users ({{ limits.ACTIVE_WINDOW_DAYS }} days)</dt><dd>{{ x.active_users_90d }} of {{ x.users_licensed }} licensed ({{ a.business }}%)
+          <div class="muted" style="font-size:12px">Licensed: {{ a.sources.licensed }} · Active: {{ a.sources.active }}</div></dd>
+        {% if x.ad_group %}<dt>Access group</dt><dd class="mono" style="font-size:12px">{{ x.ad_group }}</dd>{% endif %}
+        <dt>Annual cost</dt><dd>{{ x.annual_cost_k | money }}</dd>
+        <dt>Vendor support ends</dt><dd>{{ x.support_end.strftime('%b %d, %Y') if x.support_end else 'not announced' }}</dd>
+        <dt>Hosting</dt><dd>{{ x.hosting }}</dd>
+        <dt>Open security findings</dt><dd>{{ x.open_security_findings }}</dd>
+        <dt>Integrations</dt><dd>{{ x.integrations }}</dd>
+        <dt>Capabilities</dt><dd>{% for c in x.capabilities %}<span class="chip {{ 'trace-traced' if c in a.shared else 'outlined' }}" title="{{ 'The PLM platform provides this' if c in a.shared else 'Not in the platform' }}">{{ c }}</span> {% endfor %}</dd>
+      </dl><p class="muted" style="font-size:12px;margin-bottom:0">Green capabilities are ones the PLM platform already provides.</p></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><h3>Decision</h3>{% if d %}{{ tchip(d.decision) }}{% endif %}</div>
+    <div class="card-body">
+      {% if d %}<p style="margin-top:0">{{ d.decision }} by {{ d.decided_by }} on {{ d.at.strftime('%Y-%m-%d') }}{% if d.reason %}: {{ d.reason }}{% endif %}.</p>{% endif %}
+      {% if user.approver %}
+      <form method="post" action="/apps/{{ x.key }}/decide" class="decide">
+        <div class="time-pick">{% for t in time_options %}<label class="radio"><input type="radio" name="decision" value="{{ t }}" {{ 'checked' if (d.decision if d else a.proposal) == t }}> {{ t }}{% if t == a.proposal %} <span class="muted">(rules)</span>{% endif %}</label>{% endfor %}</div>
+        <label>Reason <span class="muted">(required if you differ from the rules)</span><textarea name="reason" rows="2" placeholder="e.g. replacement already funded for Q2"></textarea></label>
+        <button class="button contained" type="submit">Record decision</button>
+      </form>
+      {% if d and d.decision in ('Migrate', 'Eliminate') %}
+        {% if d.sent_to_backlog %}<p><span class="chip outlined">In Backlog Pilot's inbox</span></p>
+        {% elif suite_connected %}<form method="post" action="/apps/{{ x.key }}/send"><button class="button outlined" type="submit"><span class="material-symbols-outlined">send</span>Send retirement work to Backlog Pilot</button></form>{% endif %}
+      {% endif %}
+      {% else %}<div class="banner info" style="margin:0"><span class="material-symbols-outlined">lock</span><div>Approvers decide an app's future.</div></div>{% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{
+  "input": "<contract name=\"helix.md\">\n# Helix Engineering \u2014 SimuForge Token Subscription (fictional excerpt)\n\n## Term and Renewal\nInitial term: May 1, 2024 to April 30, 2027. The subscription renews automatically for twelve (12) months unless either party gives notice at least thirty (30) days before expiry.\n\n## Token Pool\nCustomer purchases a pool of 70 solver tokens. When the pool is exhausted, jobs wait in queue; additional tokens may be purchased at the then-current rate.\n\n## Price\nRenewal pricing increases by seven percent (7%) per year.\n\n## Data Retention\nHelix retains simulation results for sixty (60) days after termination, after which they are deleted.\n</contract>",
+  "output": {
+    "end_date": {
+      "value": "2027-04-30",
+      "quote": "Initial term: May 1, 2024 to April 30, 2027."
+    },
+    "auto_renew": {
+      "value": "yes",
+      "quote": "The subscription renews automatically for twelve (12) months unless either party gives notice at least thirty (30) days before expiry."
+    },
+    "notice_days": {
+      "value": "30",
+      "quote": "The subscription renews automatically for twelve (12) months unless either party gives notice at least thirty (30) days before expiry."
+    },
+    "escalator_pct": {
+      "value": "7",
+      "quote": "Renewal pricing increases by seven percent (7%) per year."
+    },
+    "trueup_premium_pct": null,
+    "termination": null,
+    "data_export": null,
+    "watch_outs": [
+      "Send non-renewal notice at least 30 days before April 30, 2027 (by about March 31, 2027), or the subscription renews automatically for another 12 months.",
+      "Renewal pricing rises 7% per year, so negotiate or budget for the increase before the renewal date.",
+      "Simulation results are deleted 60 days after termination and no export method is described, so arrange to pull your data out before the contract ends."
+    ]
+  }
+}

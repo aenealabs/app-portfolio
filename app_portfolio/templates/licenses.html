@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header"><h1>Licenses and renewals</h1><span class="muted">Utilization and deadlines computed by rule; contract terms used only after code checks them</span></div>
+<div class="kpis">
+  <div class="card kpi"><div class="overline">Spare seats at renewal</div><div class="big">{{ savings | money }}</div><div class="muted">a year, if reduced in time</div></div>
+  <div class="card kpi {{ 'kpi-warn' if trueup }}"><div class="overline">True-up exposure</div><div class="big">{{ trueup | money }}</div><div class="muted">users above entitlement</div></div>
+  <div class="card kpi"><div class="overline">Built-in increases</div><div class="big">{{ escalation | money }}</div><div class="muted">at the next renewals</div></div>
+</div>
+<div class="card">
+  <div class="card-header"><h3>Notice deadlines</h3><span class="muted" style="margin-left:auto;font-size:12px">{{ rules['notice'] }}</span></div>
+  <table>
+    <thead><tr><th>Product</th><th>Stop-renewal notice due</th><th>Renews</th><th>Status</th></tr></thead>
+    <tbody>{% for r in calendar %}
+      <tr class="notice-{{ r.notice_state }}"><td><strong>{{ r.lic.product }}</strong><div class="muted" style="font-size:12px">{{ r.lic.vendor }} · <a href="/contracts/{{ r.lic.contract }}">contract</a></div></td>
+        <td><strong>{{ r.notice_deadline.strftime('%b %d, %Y') }}</strong><div class="muted" style="font-size:12px">{{ r.terms.notice_days }} days before</div></td>
+        <td>{{ (r.terms.end_date or r.lic.renewal_date).strftime('%b %d, %Y') }}{% if r.terms.escalator_pct %}<div class="muted" style="font-size:12px">+{{ r.terms.escalator_pct | round(1) | string | replace('.0', '') }}% on renewal</div>{% endif %}</td>
+        <td>{% if r.notice_state == 'passed' %}<span class="chip sev-critical">passed: renews automatically</span>{% elif r.notice_state == 'urgent' %}<span class="chip sev-high">due within {{ limits.NOTICE_URGENT_DAYS }} days</span>{% elif r.notice_state == 'soon' %}<span class="chip sev-medium">within {{ limits.NOTICE_SOON_DAYS }} days</span>{% else %}<span class="chip outlined">later</span>{% endif %}</td></tr>
+    {% endfor %}</tbody>
+  </table>
+</div>
+<div class="card">
+  <div class="card-header"><h3>Utilization</h3></div>
+  <table>
+    <thead><tr><th>Product</th><th>Model</th><th class="num">In use / entitled</th><th>Utilization</th><th class="num">Spare</th><th class="num">True-up</th><th>Notes</th></tr></thead>
+    <tbody>{% for r in rows %}
+      <tr><td><strong>{{ r.lic.product }}</strong><div class="muted" style="font-size:12px">{{ r.lic.key }} · {{ r.lic.vendor }}</div></td><td>{{ r.lic.model }}</td>
+        <td class="num">{{ r.used }} / {{ r.lic.entitlement }}</td>
+        <td><span class="score-bar"><span style="width:{{ [100 * r.utilization, 100] | min }}%"></span></span> {{ (100 * r.utilization) | round | int }}%</td>
+        <td class="num">{% if r.spare %}{{ r.spare }} · {{ r.savings_k | money }}{% endif %}</td>
+        <td class="num">{% if r.trueup_users %}<span class="flag">{{ r.trueup_users }} users · {{ r.trueup_k | money }}</span>{% endif %}</td>
+        <td style="font-size:12px;white-space:normal">{% if r.near_capacity %}Near capacity: jobs or users wait. {% endif %}{% if r.notice_state == 'unknown' %}{{ 'No contract on file.' if not r.lic.contract else 'Contract terms not read yet.' }} {% elif r.notice_state == 'no auto-renewal' %}Does not renew automatically. {% endif %}{% set n = r.notes | join('. ') %}{{ n[:1] | upper }}{{ n[1:] }}</td></tr>
+    {% endfor %}</tbody>
+  </table>
+  <div class="card-body muted" style="font-size:12px">{{ rules['over'] }}. {{ rules['trueup'] }}. {{ rules['capacity'] }}.</div>
+</div>
+{% endblock %}

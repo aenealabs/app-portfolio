@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header"><h1>Directory</h1><span class="muted">Legacy engineering apps that grant access through Active Directory groups, read over LDAP</span></div>
+{% if message %}<div class="banner error" role="alert"><span class="material-symbols-outlined">error</span><div>{{ message }}</div></div>{% endif %}
+{% if notice %}<div class="banner success"><span class="material-symbols-outlined">check_circle</span><div>{{ notice }}</div></div>{% endif %}
+<div class="grid-2">
+  <div class="card">
+    <div class="card-header"><h3>Access groups</h3>
+      {% if user.approver %}<form method="post" action="/directory/sync" style="margin-left:auto"><button class="button outlined" type="submit"><span class="material-symbols-outlined">sync</span>Count groups now</button></form>{% endif %}</div>
+    <table>
+      <thead><tr><th>App</th><th>Group</th><th class="num">Entitled</th><th class="num">Signed in ({{ limits.ACTIVE_WINDOW_DAYS }} d)</th><th class="num">Disabled still in group</th><th>Counted</th></tr></thead>
+      <tbody>{% for a in mapped %}{% set c = counts.get(a.app.key) %}
+        <tr><td><a href="/apps/{{ a.app.key }}">{{ a.app.name }}</a><div class="muted" style="font-size:12px">active users from: {{ a.app.active_source or 'domain sign-ins (proxy)' }}</div></td>
+          <td class="mono" style="font-size:12px">{{ group_name(a.app.ad_group) }}</td>
+          {% if c %}<td class="num">{{ c.entitled }}{% if c.nested_groups %}<div class="muted" style="font-size:11px">via {{ c.nested_groups }} nested</div>{% endif %}</td>
+          <td class="num">{{ c.active }}</td>
+          <td class="num">{% if c.disabled %}<span class="flag">{{ c.disabled }}</span>{% else %}0{% endif %}</td>
+          <td style="font-size:12px">{{ c.synced_at.strftime('%Y-%m-%d %H:%M') }}{% if c.missing %}<div class="muted">{{ c.missing }} member{{ '' if c.missing == 1 else 's' }} not found</div>{% endif %}</td>
+          {% else %}<td colspan="4" class="muted">not counted yet</td>{% endif %}</tr>
+      {% endfor %}</tbody>
+    </table>
+    <div class="card-body muted" style="font-size:12px">Entitled: enabled user accounts in the group, including nested groups. Signed in: a domain sign-in within {{ limits.ACTIVE_WINDOW_DAYS }} days (lastLogonTimestamp, which can lag about 14 days). That is a proxy, not use of the app, so the rules use it only for apps with no app-level source. Only counts are stored, never names.</div>
+  </div>
+  <div class="card">
+    <div class="card-header"><h3>Connection</h3></div>
+    <div class="card-body source-list">
+      {% if directory.live %}
+        <div><span class="overline">Directory</span><br><span class="mono">{{ directory.url }}</span></div>
+        <div><span class="overline">Service account</span><br><span class="mono" style="font-size:12px">{{ directory.bind_dn }}</span></div>
+      {% else %}
+        <div class="banner info" style="margin:0"><span class="material-symbols-outlined">science</span><div>Demo directory: a fictional in-memory Active Directory. Set AP_LDAP_URL to read a real one.</div></div>
+      {% endif %}
+      <ul class="tight" style="font-size:13px">
+        <li>Read-only bind with one service account; no writes are possible.</li>
+        <li>LDAPS (port 636) only; plain LDAP is refused unless explicitly allowed for a lab.</li>
+        <li>Groups are expanded by reading members, so nested groups count and loops between groups are safe.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

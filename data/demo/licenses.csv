@@ -1,0 +1,9 @@
+key,product,vendor,model,entitlement,peak_90d,active_named_90d,unit_cost_k,renewal_date,contract
+LIC-01,PLM platform engineer seats,Keystone PLM,concurrent,900,612,1180,2.4,2027-01-31,keystone-plm.md
+LIC-02,CircuitStudio Pro,Voltaic,named,210,188,214,2.2,2026-12-15,voltaic.md
+LIC-03,SimuForge solver tokens,Helix Engineering,token,70,69,64,5.8,2027-04-30,helix.md
+LIC-04,Vaultline Classic,Ardent Systems,named,480,402,402,0.55,2026-11-30,ardent.md
+LIC-05,SpecTrack 5,Calder Tools,named,160,132,132,0.75,2027-06-30,calder.md
+LIC-06,QualityLoop,Northbridge Software,named,260,198,198,0.65,2027-02-28,northbridge.md
+LIC-07,RedlineQ,Sablewood,named,150,22,22,0.12,2026-12-31,
+LIC-08,HarnessCAD,Voltaic,named,55,50,58,2.9,2026-12-15,voltaic.md

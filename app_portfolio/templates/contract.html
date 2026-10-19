@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}{% set c = v.contract %}
+<div class="page-header"><h1 class="long-title">{{ c.text.splitlines()[0].lstrip('# ') }}</h1></div>
+{% if message %}<div class="banner error" role="alert"><span class="material-symbols-outlined">error</span><div>{{ message }}</div></div>{% endif %}
+<div class="grid-even">
+  <div class="card" id="terms">
+    <div class="card-header"><span class="material-symbols-outlined" style="color:var(--primary)">auto_awesome</span><h3>Terms</h3>
+      {% if v.reading %}<span class="chip {{ 'trace-unverified' if v.flagged else 'trace-traced' }}" style="margin-left:auto">{{ (v.flagged ~ ' flagged') if v.flagged else 'every quote checked' }}</span>{% endif %}</div>
+    <div class="card-body">
+    {% if v.reading %}
+      <table class="terms"><tbody>
+      {% for t in v.checked %}
+        <tr class="{{ 'flagged' if t.term and not t.ok }}"><th>{{ term_names[t.name] }}</th>
+          <td>{% if t.term %}<strong>{{ t.term.value }}</strong>{% if t.ok %} <span class="material-symbols-outlined ok" title="Checked against the contract">verified</span>{% endif %}<blockquote>"{{ t.term.quote }}"</blockquote>{% if not t.ok %}<div class="issue-line">{{ t.problem }} Not used by the rules.</div>{% endif %}{% else %}<span class="muted">not stated</span>{% endif %}</td></tr>
+      {% endfor %}
+      </tbody></table>
+      {% if v.terms.watch_outs %}<div class="overline" style="margin-top:12px">Act before renewal</div><ul class="tight">{% for w in v.terms.watch_outs %}<li style="font-size:13px">{{ w }}</li>{% endfor %}</ul>{% endif %}
+      <div class="muted" style="font-size:12px">{{ v.reading.drafted_by }}, requested by {{ v.reading.requested_by }}. Only terms with a check mark feed the renewal deadlines and costs.</div>
+    {% else %}<p style="margin-top:0;font-size:13px">Not read yet. The AI extracts the renewal, notice, price, true-up, termination, and data terms, each with an exact quote that code checks.</p>{% endif %}
+    {% if user.approver %}<form method="post" action="/contracts/{{ c.name }}/read" onsubmit="this.querySelector('button').disabled=true"><button class="button {{ 'text' if v.reading else 'outlined' }}" type="submit"><span class="material-symbols-outlined">auto_awesome</span>{{ 'Read again' if v.reading else 'Read the contract' }}</button></form>{% endif %}
+    </div>
+  </div>
+  <div class="card"><div class="card-header"><h3>Contract text</h3><span class="muted" style="margin-left:auto;font-size:12px">fictional</span></div>
+    <div class="card-body contract-text">{{ c.text }}</div></div>
+</div>
+{% endblock %}

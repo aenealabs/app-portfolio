@@ -1,0 +1,35 @@
+{
+  "input": "<contract name=\"voltaic.md\">\n# Voltaic \u2014 Software License and Maintenance Agreement (fictional excerpt)\n\nCovers: CircuitStudio Pro (named users) and HarnessCAD (named users)\n\n## Term\nThe maintenance term ends December 15, 2026 and renews automatically for one (1) year terms unless Customer cancels by written notice no later than sixty (60) days before the renewal date.\n\n## Fees and Adjustments\nMaintenance fees for each renewal year may increase by up to six percent (6%).\n\n## Named User Compliance\nVoltaic may audit named-user counts once per year. Named users above the licensed quantity are billed as a true-up at list price plus fifteen percent (15%), retroactive to the start of the current term.\n\n## Termination\nEither party may terminate for material breach on thirty (30) days written notice if the breach is not cured.\n</contract>",
+  "output": {
+    "end_date": {
+      "value": "2026-12-15",
+      "quote": "The maintenance term ends December 15, 2026 and renews automatically for one (1) year terms unless Customer cancels by written notice no later than sixty (60) days before the renewal date."
+    },
+    "auto_renew": {
+      "value": "yes",
+      "quote": "The maintenance term ends December 15, 2026 and renews automatically for one (1) year terms unless Customer cancels by written notice no later than sixty (60) days before the renewal date."
+    },
+    "notice_days": {
+      "value": "60",
+      "quote": "The maintenance term ends December 15, 2026 and renews automatically for one (1) year terms unless Customer cancels by written notice no later than sixty (60) days before the renewal date."
+    },
+    "escalator_pct": {
+      "value": "6",
+      "quote": "Maintenance fees for each renewal year may increase by up to six percent (6%)."
+    },
+    "trueup_premium_pct": {
+      "value": "15",
+      "quote": "Named users above the licensed quantity are billed as a true-up at list price plus fifteen percent (15%), retroactive to the start of the current term."
+    },
+    "termination": {
+      "value": "The customer can terminate early only for the vendor's material breach, by giving thirty days' written notice if the breach is not cured.",
+      "quote": "Either party may terminate for material breach on thirty (30) days written notice if the breach is not cured."
+    },
+    "data_export": null,
+    "watch_outs": [
+      "Send written cancellation notice by October 16, 2026 (60 days before the December 15, 2026 renewal), or maintenance renews automatically for another year.",
+      "Expect maintenance fees to rise by up to 6% at renewal, so negotiate a cap or budget for it before the notice deadline.",
+      "Check named-user counts for CircuitStudio Pro and HarnessCAD before the annual audit, because any excess users are billed at list price plus 15%, backdated to the start of the term."
+    ]
+  }
+}

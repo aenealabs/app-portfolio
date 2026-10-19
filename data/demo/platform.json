@@ -1,0 +1,19 @@
+{
+ "_note": "Fictional: capabilities the strategic PLM platform already provides.",
+ "name": "PLM platform (strategic)",
+ "as_of": "2026-10-01",
+ "capabilities": [
+  "part management",
+  "BOM management",
+  "engineering change",
+  "document management",
+  "CAD data management",
+  "workflow approvals",
+  "classification",
+  "3D viewer",
+  "requirements management",
+  "supplier collaboration",
+  "where-used reporting",
+  "access control"
+ ]
+}
